@@ -1,0 +1,48 @@
+@(teamId: Int, projectId: Int, todo: Todo)
+@import util.UserHelper
+<li class="edit_mode" data-behavior="has_hover_content sortable" data-due-datetime="2014-04-03" data-sortable-type="todo" data-url="/@teamId/project/@projectId/todo/@todo.id" id="todo_@todo.id">
+    <form accept-charset="UTF-8" action="/@teamId/project/@projectId/todo/@todo.id" class="edit_todo" data-remote="true" id="edit_todo_102815865" method="post">
+        <input disabled="disabled" name="todo[completed]" type="hidden" value="0">
+        <input disabled="disabled" id="todo_completed" name="todo[completed]" type="checkbox" value="1">
+        <textarea data-behavior="autoresize submit_on_enter" id="todo_description" name="description" placeholder="To-do description" rows="1" data-autoresize="true" style="resize: none; overflow: hidden; min-height: 18px;">@todo.description</textarea>
+        <span style="position:relative">
+            <span class="pill has_balloon" data-behavior="expandable expand_exclusively load_assignee_options">
+                <a data-behavior="expand_on_click" href="#">
+                    <span data-behavior="assignee_name" data-blank-text="未指派">@todo.worker</span>
+                    <span class="separator"> · </span>
+                    <time data-behavior="due_date" data-blank-text="没有截止时间">@todo.deadlineDisplay</time>
+                </a>
+                <span class="balloon right_side expanded_content">
+                    <span class="arrow"></span>
+                    <span class="arrow"></span>
+
+                    <label>
+                        <b>将任务指派给:</b>
+                        <select data-behavior="assignee_options" data-private="false" data-project-id="@projectId" id="todo_assignee_code" name="workerId" data-assignee-options-loaded="true">
+                            <option value="">未指派</option>
+                            @UserHelper.findUsersByProjectId(projectId).map { user =>
+                                <option value="@user.id" @if(todo.workerId == user.id) {selected}>@user.name</option>
+                            }
+                        </select>
+                    </label>
+                    <div data-display="no-email-confirmation-off">
+                        <label>
+                            <b>任务截止时间:</b>
+                            <hr>
+                            <input data-behavior="alt_date_field" name="deadline" type="hidden" value="@todo.deadline">
+                            <div data-behavior="date_picker" class="notranslate"></div>
+                        </label>
+
+                        <footer>
+                            <a class="no_date" data-behavior="no_due_date" href="#">没有截止时间</a>
+                        </footer>
+                    </div>
+                </span>
+            </span>
+        </span>
+        <p class="submit">
+            <button type="submit" class="btn btn-create-todolist btn-primary">添加任务</button>
+            <a class="cancel" data-behavior="cancel" data-role="cancel" href="#">取消</a>
+        </p>
+    </form>
+</li>

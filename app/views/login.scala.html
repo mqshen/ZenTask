@@ -1,0 +1,41 @@
+@(loginForm: Form[(String, String)])
+
+@import helper._
+
+@public {
+<div class="wrapper">
+    <div class="page" id="page-signin">
+        <div class="sign-page">
+            <div class="hd">
+                <h1 class="logo">ZenTask</h1>
+            </div>
+
+            <div class="bd">
+                @helper.form(action = routes.UserController.doLogin, 'class -> "login-form", 'id -> "login-form") {
+                    @inputText(loginForm("email"),
+                        'class -> "form-control",
+                        'value -> "goldratio87@gmail.com",
+                        'placeholder -> "邮箱",
+                        '_label -> "email",
+                        '_class -> "input-group input-group-lg")
+
+                    @inputPassword(loginForm("password"),
+                        'class -> "form-control detail",
+                        'value -> "111111",
+                        'placeholder -> "密码",
+                        '_label -> "密码",
+                        '_class -> "input-group input-group-lg project-detail",
+                        '_fieldClass -> "detail")
+
+                    <div class="btn-group btn-group-justified">
+                        <button class="btn btn-success" type="submit" >确定</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
+

@@ -1,0 +1,83 @@
+@(projectId: Int)
+@import util.UserHelper
+<span class="pill has_balloon" data-behavior="expandable expand_exclusively load_assignee_options">
+    <a data-behavior="expand_on_click" href="#">
+        <span data-behavior="assignee_name" data-blank-text="未指派">未指派</span>
+        <span class="separator"> · </span>
+        <time data-behavior="due_date" data-blank-text="没有截止时间">没有截止时间</time>
+    </a>
+    <span class="balloon right_side expanded_content">
+        <span class="arrow"></span>
+        <span class="arrow"></span>
+
+        <label>
+            <b>将任务指派给:</b>
+            <select data-behavior="assignee_options" data-private="false" data-project-id="@projectId" id="todo_assignee_code" name="workerId" data-assignee-options-loaded="true">
+                <option value="">未指派</option>
+                @UserHelper.findUsersByProjectId(projectId).map { user =>
+                <option value="@user.id" >@user.name</option>
+                }
+            </select>
+        </label>
+        <div data-display="no-email-confirmation-off">
+            <label>
+                <b>任务截止时间:</b>
+                <hr>
+                <input data-behavior="alt_date_field" name="deadline" type="hidden" value="">
+                <div data-behavior="date_picker" class="notranslate"></div>
+            </label>
+
+            <footer>
+                <a class="no_date" data-behavior="no_due_date" href="#">没有截止时间</a>
+            </footer>
+        </div>
+    </span>
+</span>
+<!--
+<span class="pill has_balloon blank ignore_hover" data-behavior="expandable expand_exclusively load_assignee_options hover_content">
+    <a data-behavior="expand_on_click" href="#">
+        <span data-behavior="assignee_name" data-blank-text="Unassigned">
+            Unassigned
+        </span>
+        <span class="separator"> · </span>
+        <time data-behavior="due_date" data-blank-text="No due date"> No due date </time>
+    </a>
+    <span class="balloon right_side expanded_content">
+        <span class="arrow"></span>
+        <span class="arrow"></span>
+
+        <label>
+            <b>Assign this to-do to:</b>
+            <select data-behavior="assignee_options" data-private="false" data-project-id="@projectId" id="todo_assignee_code" name="todo[assignee_code]" data-assignee-options-loaded="true">
+                <option value="">Unassigned</option>
+                <option value="p7554423">Me (kayouhui)</option>
+                <option value=" "></option>
+                <option value="p7554423">kayouhui</option>
+            </select>
+        </label>
+
+        <div data-display="no-email-confirmation-on" class="no_email_confirmation">
+            <h4>This person has turned off email notifications</h4>
+            <p>They won’t receive an email about this to-do. Assign it to them anyway?</p>
+            <p><a class="action_button button" data-behavior="confirm_assignee_change" href="#">Yes, that’s fine</a> <a class="button" data-behavior="cancel_assignee_change" href="#">No</a></p>
+        </div>
+
+        <div data-display="no-email-confirmation-off">
+            <small>
+                <p data-display="no-email-warning-on" style="display:none" class="no_email_warning">This person won’t get an email because they turned off email notifications</p>
+                <p data-display="no-email-warning-off" style="display:block">The person you select will be notified by email</p>
+            </small>
+
+            <label>
+                <b>Set the due date:</b>
+                <hr>
+                <input data-behavior="alt_date_field" name="todo[due_at]" type="hidden">
+                <div data-behavior="date_picker" class="notranslate"></div>
+            </label>
+
+            <footer><a class="no_date" data-behavior="no_due_date" href="#">No due date</a></footer>
+        </div>
+
+    </span>
+</span>
+-->

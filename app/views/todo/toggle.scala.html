@@ -1,0 +1,14 @@
+@(todo: Todo, content: String)
+$('article#todolist_@todo.listId li#todo_@todo.id').remove();
+
+// Remove empty list from person/outstanding_todos when the last to-do is completed
+if ($('article#todolist_@todo.listId').find('li').length == 0) {
+    setTimeout(function() {
+    $('article#todolist_@todo.listId').fadeOutAndRemove();
+    }, 10);
+}
+@if(todo.done) {
+$('article#todolist_@todo.listId ul.completed').show().prepend('@Html(content)')
+} else {
+    $('article#todolist_@todo.listId ul.todos').append('@Html(content)')
+}

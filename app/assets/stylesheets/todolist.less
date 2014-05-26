@@ -1,0 +1,222 @@
+@import "variables.less";
+
+.text_entry {
+    color: #a9a9a9;
+    background: #fff;
+    padding: 19px;
+    border: 1px solid #ccc;
+    position: relative;
+    margin: 0;
+    -webkit-box-shadow: 0 2px 0 #ddd;
+    -moz-box-shadow: 0 2px 0 #ddd;
+    box-shadow: 0 2px 0 #ddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    zoom: 1;
+    textarea, input[type=text] {
+        color: black;
+        padding: 0;
+        margin: 0;
+        width: 99%;
+        background: #fff;
+        border: none;
+        outline: none;
+        line-height: inherit;
+        -webkit-appearance: none;
+    }
+}
+
+article.todolist{
+    header h3 {
+        font-size: 15px;
+        margin-bottom: 0;
+    }
+    &.expanded header.expanded_content header {
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        h3 {
+            border-bottom: none;
+            margin-left: -1px;
+            padding-left: 0;
+            padding-bottom: 5px;
+        }
+        input {
+            padding: 5px 0;
+            border-bottom: 1px dotted #b3b3b3;
+        }
+        input, textarea {
+            margin: 0;
+            font-size: 16px;
+        }
+    }
+}
+ul.todolists {
+    margin-top: 20px;
+    position: relative;
+    >li {
+        margin: -10px 0 10px 0;
+        padding: 10px 0 10px 0;
+    }
+    header h3 {
+        font-size: 16px;
+        margin-bottom: 0;
+        >a {
+            color: #1c5c76;
+            text-decoration: underline;
+        }
+        span.project_name {
+            display: none;
+        }
+    }
+    h3 span.unlinked_title {
+        display: none;
+    }
+
+}
+article.todolist {
+    >ul {
+        position: relative;
+        list-style: none;
+        margin: 0 0 0 7px;
+        min-height: 6px;
+        >li {
+            padding-left: 19px;
+            line-height: 20px;
+            padding-right: 110px;
+            clear: both;
+            word-wrap: break-word;
+            &.edit_mode {
+                margin-top: -1px;
+                padding-left: 18px;
+                margin-bottom: 10px;
+                >form {
+                    >textarea {
+                        width: 460px;
+                        font-size: 15px;
+                        margin: 3px 0 -5px -2px;
+                        line-height: 17px;
+                        height: 18px;
+                        padding: 0;
+                        resize: none;
+                        -webkit-appearance: none;
+                        outline: none;
+                        border: none;
+                        border-bottom: 1px dotted #b3b3b3;
+                    }
+                    >input[type=checkbox] {
+                        margin-top: 4px;
+                        vertical-align: top;
+                        margin-left: -18px;
+                        margin-right: 4px;
+                        font-size: larger;
+                    }
+                }
+            }
+            >div>span.wrapper {
+                position: relative;
+                margin-left: -19px;
+                padding-left: 20px;
+                >input[type=checkbox] {
+                    margin-left: -20px;
+                    margin-right: 2px;
+                    vertical-align: baseline;
+                    margin-top: 3px;
+                    font-size: larger;
+                }
+                span.content {
+                    margin-right: 2px;
+                }
+                span.content_for_perma {
+                    display: none;
+                }
+            }
+            form {
+                display: inline;
+            }
+            span.pill {
+                .blank.showing {
+                    position: relative;
+                    margin: 0;
+                    line-height: 15px;
+                }
+                span.balloon {
+                    div.ui-datepicker div.ui-datepicker-header {
+                        margin-bottom: 9px;
+                        a.ui-datepicker-prev, a.ui-datepicker-next {
+                            color: #444;
+                            font-size: 16px;
+                            line-height: 19px;
+                            font-weight: bold;
+                            text-align: center;
+                            padding: 3px 9px;
+                            text-decoration: none;
+                            cursor: pointer;
+                            -webkit-border-radius: 4px;
+                        }
+                        a.ui-datepicker-prev, a.ui-datepicker-next {
+                            margin-top: -6px;
+                        }
+                        a.ui-datepicker-prev {
+                            margin: -3px 0 0 -9px;
+                        }
+                        a.ui-datepicker-next {
+                            margin: -3px -9px 0 0;
+                        }
+                    }
+                    small+label {
+                        padding-top: 15px;
+                        display: block;
+                        b+hr {
+                            margin-top: 3px !important;
+                        }
+                    }
+                    footer {
+                        text-align: center;
+                        margin: 5px 0;
+                        font-size: 12px;
+                        a {
+                            color: #1c5c76;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                &.busy {
+                    min-width: 21px;
+                    background: url("@{base-url}/images/dots-white.gif") no-repeat left center !important;
+                    border: none;
+                    * {
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+        &.completed {
+            clear: both;
+            display: none;
+            &.truncated li.show:first-of-type {
+                display: block !important;
+            }
+            >li {
+                margin-bottom: 7px;
+                cursor: auto;
+                font-size: 11px;
+                line-height: 14px;
+                color: #999;
+            }
+            &.truncated li.show {
+                display: none;
+            }
+        }
+    }
+}
+.btn-new-todo {
+    font-size: 14px;
+    background: none;
+    color: #4298ba;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+    box-shadow: none;
+}

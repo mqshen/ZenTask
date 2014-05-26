@@ -1,0 +1,48 @@
+@(teamId: Int, user: User, todos: List[Todo])
+
+@import util.DateHelper
+
+@main(teamId, "我自己") {
+<div class="container stack_container" >
+    <div class="panel sheet person overview" >
+        <title>@user.name</title>
+        <header class="person">
+            <figure class="full_width">
+                <img class="avatar"  height="96" id="avatar_person_@user.id"
+                     src="/avatar/user.avatar" title="@user.name" width="96">
+            </figure>
+            <h2>@user.name</h2>
+            <h3><a href="mailto:@user.email">@user.email</a></h3>
+            <p class="last_active">
+                <span>最后登录时间:<time data-local="time-ago" datetime="" title=""></time></span>
+            </p>
+        </header>
+        <div class="sheet_body">
+            <section class="events">
+                <section class="activity grouped_by_date">
+                    <header class="todos">
+                        <h1>我的任务</h1>
+                    </header>
+                    <article class="today_todo todolist">
+                        <h5 class="" style="">今日任务</h5>
+                        <ul class="todos">
+                            @todos.filter(todo => todo.deadline.map( date => DateHelper.todayOrBefore(date)).getOrElse(false)).map { todo =>
+                                @helper.todo(teamId, todo)
+                            }
+                        </ul>
+                    </article>
+                    <article class="todolist">
+                        <ul class="todos">
+                            @todos.filter(todo => todo.deadline.map( date => !DateHelper.todayOrBefore(date)).getOrElse(false)).map { todo =>
+                                @helper.todo(teamId, todo)
+                            }
+                        </ul>
+                    </article>
+                </section>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+}

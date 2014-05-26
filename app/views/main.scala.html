@@ -1,0 +1,50 @@
+@(teamId: Int, title: String)(content: Html)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@title</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/application.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/font.css")">
+    <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/hover.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/lily.calendar.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/lily.form.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/expand.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/application.js")" type="text/javascript"></script>
+</head>
+<body>
+<header>
+    <nav data-behavior="hover_global_nav" class="has_announcements">
+        <div class="logo">
+            <a href="/about">MyTask</a>
+        </div>
+        <div class="global_links">
+            <a class="topnav_root" href="/@teamId">项目</a>
+            <a class="topnav_calendar" href="/@teamId/calendar">日历</a>
+            <a class="topnav_everything" href="/@teamId/operation">回顾</a>
+            <a class="topnav_everyone" href="/@teamId/people">团队</a>
+            <a class="topnav_me" href="/@teamId/people/me">我自己</a>
+        </div>
+        <div class="current_user">
+            <ul>
+                <li><a data-replace-stack="true" href="/settings">设置</a></li>
+                <li><a data-replace-stack="true" href="/team">创建团队</a></li>
+                <li><a data-method="delete" href="/signOut" rel="nofollow">退出</a></li>
+            </ul>
+        </div>
+        <div class="jumpto" data-behavior="jumpto">
+            <input type="text" id="autocomplete" data-behavior="placeholder" placeholder="搜索项目、成员或标签">
+            <div id="autocomplete_container" ></div>
+        </div>
+    </nav>
+</header>
+<div class="workspace" id="workspace">
+    @content
+    <div class="modal-backdrop"></div>
+</div>
+<div class="footer">
+</div>
+</body>
+</html>
+

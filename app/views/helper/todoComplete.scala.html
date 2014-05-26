@@ -1,0 +1,21 @@
+@(teamId: Int, projectId: Int, todo: Todo)
+@import util.DateHelper
+<li class="todo show" data-behavior="has_hover_content sortable complete" data-sortable-type="todo" data-url="/@teamId/project/@projectId/todo/@todo.id" id="todo_@todo.id">
+    <div class="nubbin" data-behavior="nubbin hover_content" style="display: none; left: -45px;">
+        <div class="spacer"></div>
+        <a class="image delete" data-confirm="Are you sure you want to delete this to-do?" data-method="post" data-remote="true" href="/@teamId/project/@projectId/todo/@todo.id/trash" rel="nofollow">Delete</a>
+    </div>
+
+    <div class="complete">
+      <span class="wrapper">
+        <input checked="checked" data-behavior="toggle" data-url="/@teamId/project/@projectId/todo/@todo.id/toggle" name="todo_complete" type="checkbox" value="1">
+
+        <span class="content" data-behavior="sortable_handle">
+          <a href="/@teamId/project/@projectId/todo/@todo.id">@todo.description</a>
+        </span>
+          <span class="completed_by">
+            (在@DateHelper.formDateSimple(todo.deadline)由 @todo.worker 完成)
+          </span>
+      </span>
+    </div>
+</li>

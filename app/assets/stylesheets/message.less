@@ -1,0 +1,180 @@
+@import "variables.less";
+
+div.sheet.message.new>div.sheet_body article {
+    header {
+        margin: 0;
+        padding: 30px 65px 5px 20px;
+        border-bottom: 5px solid #ccc;
+        h3 {
+            margin: 0;
+            textarea {
+                outline: none;
+                padding: 0 0 2px;
+                margin: 0;
+                border: 0;
+                font-size: 28px;
+                line-height: 30px;
+                font-weight: normal;
+                min-height: 31px;
+                width: 830px;
+                -webkit-appearance: none;
+            }
+        }
+    }
+    textarea.body {
+        width: 100%;
+        padding: 0 10px;
+        margin: 15px 0 0;
+        border: none;
+        font-size: 17px;
+        line-height: 25px;
+    }
+    form div.attachments {
+        border: none;
+        border-top: 1px solid #ccc;
+        min-height: 0;
+        -webkit-border-radius: 0;
+        border-radius: 0;
+        .prompt_graphic {
+            left: 44px;
+        }
+        div.file_input_button {
+            margin-left: 54px;
+        }
+    }
+}
+
+div.file_input_button {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    float: right;
+    span.file_input_container {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        vertical-align: bottom;
+        cursor: pointer;
+        input[type=file] {
+            cursor: pointer;
+            height: 100%;
+            width: 100%;
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 30px;
+            -moz-opacity: 0.01;
+            opacity: 0.01;
+        }
+    }
+    a {
+        outline: none;
+    }
+}
+form div.attachments {
+    padding: 12px;
+    position: relative;
+    white-space: nowrap;
+    font-size: 13px;
+    line-height: 17px;
+    border: 1px dashed #ddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    div.file_input_button {
+        float: none;
+        color: #888;
+        margin-left: 15px;
+    }
+    .prompt_graphic {
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        left: 5px;
+        border: none;
+        width: 18px;
+        height: 0;
+        padding: 18px 0 0;
+        display: block;
+        overflow: hidden;
+        background-image: url("@{base-url}/images/paperclip.png");
+    }
+}
+
+.has_tools, [data-behavior~=sidebar_follower_container] {
+    position: relative;
+}
+article.message {
+    word-wrap: break-word;
+    >header {
+        margin-bottom: 20px;
+        max-width: 750px;
+        h3 {
+            font-size: 24px;
+            line-height: 26px;
+        }
+        p {
+            color: #aa9c84;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+    img.avatar {
+        float: left;
+        width: 59px;
+        height: 59px;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+    div.formatted_content {
+        font-size: 16px;
+        line-height: 21px;
+        max-width: 580px;
+        padding-bottom: 19px;
+    }
+}
+article.message>div.attachments,
+article.message>div.formatted_content {
+    margin-left: 78px;
+}
+aside.tools {
+    position: absolute;
+    right: -45px;
+    top: 0;
+    padding-left: 10px;
+    padding-bottom: 6px;
+    background-color: #fff;
+    overflow: visible !important;
+    >.tool {
+        width: 115px;
+        display: block;
+        float: right;
+        clear: both;
+        border-top: 1px solid #e5e5e5;
+        border-bottom: 1px solid #e5e5e5;
+        margin-top: -1px;
+        padding: 5px 20px 4px 0;
+        min-height: 21px;
+        overflow: hidden;
+        -webkit-transition: width 0.3s;
+        -moz-transition: width 0.3s;
+        transition: width 0.3s;
+        a {
+            padding: 0;
+            color: #1c5c76;
+            text-decoration: underline;
+        }
+        .confirm {
+            display: none;
+            line-height: 20px;
+            a {
+                color: #c00;
+                text-decoration: underline;
+            }
+        }
+        [data-role~=confirm_view] {
+            width: 240px;
+        }
+    }
+}

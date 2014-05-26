@@ -1,0 +1,3 @@
+@(todoId: Int, content: String)
+
+$('li#todo_@todoId').replaceWith('@Html(content)')

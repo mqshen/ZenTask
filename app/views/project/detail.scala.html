@@ -1,0 +1,179 @@
+@(teamId: Int, project: Project)
+
+@main(teamId, "Welcome to Play") {
+
+<div class="container stack_container" data-container-id="2" style="width: 960px;">
+    <div class="panel sheet project active" data-behavior=" " data-creator-id="7554424" data-status="active">
+        <title>@project.name</title>
+        <div class="archived_notice">
+            <span>
+                This project is locked and archived.
+            </span>
+            <!--
+            <span data-visible-to="admin creator">
+                Go to <a data-remote="true" data-stacker="false" href="/@teamId/projects/@project.id/edit">Project settings</a> to reactivate it.
+            </span>
+            -->
+        </div>
+        <header>
+            <div class="header_links">
+                <a href="/@teamId/project/@project.id/accesses">
+                    <span class="link">邀请</span><br>
+                    <span class="detail">
+                      1 person on this project
+                    </span>
+                </a>
+                <a href="/@teamId/project/@project.id/summary">
+                    <span class="link">日志</span><br>
+                    <span class="detail">最近时间</span>
+                </a>
+            </div>
+            <h1>@project.name</h1>
+            <div data-behavior="edit_project_header expandable">
+                <div class="collapsed_content">
+                    <div class="position_reference">
+                        <h1 class="field" data-behavior="editable_field_prompt">
+                            @project.name
+                        </h1>
+                        <div class="star" data-behavior="project_star" data-project-id="@project.id" data-refresh-project-view="false" title="Starring a project will highlight it on the projects index page"></div>
+                    </div>
+
+                    <div class="description field" data-behavior="editable_field_prompt" style="width: auto; border-color: transparent;">
+                        @project.description
+                    </div>
+                </div>
+
+                <div class="expanded_content" data-visible-to="admin creator">
+                    <form accept-charset="UTF-8" action="/@teamId/project/@project.id" class="edit_project" data-remote="true" id="edit_project_@project.id" method="post">
+                        <div style="display:none">
+                            <!--
+                            <input name="utf8" type="hidden" value="✓">
+                            <input name="_method" type="hidden" value="patch">
+                            -->
+                        </div>
+
+                        <div class="position_reference">
+                            <h1 class="field">
+                                <textarea data-behavior="autoresize submit_on_enter" id="project_name" name="name" rows="1">@project.name</textarea>
+                            </h1>
+                        </div>
+
+                        <div class="description field">
+                            <textarea data-behavior="autoresize submit_on_enter" id="project_description" name="description" placeholder="Add a project description" rows="1">@project.description</textarea>
+                        </div>
+
+                        <div class="submit">
+                            <input class="action_button" name="commit" type="submit" value="Rename project"> or
+                            <a class="cancel" data-behavior="cancel" data-role="cancel" href="#">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="project_toolbar_@project.id" class="project_toolbar" data-autoview="">
+                <div class="tools has_tools_in_project">
+                    <div class="group in_project">
+                        <a href="/@teamId/projects/@project.id/topics" data-tool-name="topics">
+                            <span class=""><strong>8 Discussions</strong></span>
+                        </a>
+                        <a href="/@teamId/projects/@project.id/todolists" data-tool-name="todolists">
+                            <span class=""><strong>11 To-dos</strong></span>
+                        </a>
+                        <a href="/@teamId/projects/@project.id/attachments" data-tool-name="attachments">
+                            <span class=""><strong>17 Files</strong></span>
+                        </a>
+                        <a href="/@teamId/projects/@project.id/documents" data-tool-name="documents">
+                            <span class=""><strong>3 Text documents</strong></span>
+                        </a>
+                        <a href="/@teamId/projects/@project.id/calendar_events" data-tool-name="calendar_events">
+                            <span class=""><strong>Events</strong></span>
+                        </a>
+                    </div>
+    
+                </div>
+            </div>
+        </header>
+
+        <div class="sheet_body">
+            <section class="topics " data-collection-name="topics" style="display: block;">
+                <header class="has_buttons">
+                    <h1><a href="/@teamId/project/@project.id/topics">讨论</a></h1>
+                    <a class="action_button button" href="/@teamId/project/@project.id/message/new">发起新讨论</a>
+                </header>
+                <table class="inbox">
+                    <tbody>
+                    @project.recentMessages.map { message =>
+                    <tr class="topic message_@message.id" id="topic_56435663">
+                        <td class="avatar">
+                            <a href="/@teamId/project/@project.id/message/@message.id">
+                                <img alt="@message.own.name" class="avatar" height="30" src="/avatar.40.gif" title="@message.own.id" width="30">
+                            </a>
+                        </td>
+
+                        <td class="who">
+                            <a href="/@teamId/project/@project.id/message/@message.id">@message.own.name</a>
+                        </td>
+
+                        <td class="what">
+
+                            <a href="/@teamId/project/@project.id/message/@message.id">
+                                <strong>@message.subject</strong>
+                                <span class="bucket_name">(@project.name)</span>
+                                <span class="excerpt"> - @message.summary</span>
+                            </a>
+                        </td>
+
+                        <td class="when">
+                            <a href="/2600950/projects/5927134/messages/26225560">
+                                <time data-local="time-or-date" datetime="2014-05-24T09:34:23Z" title="May 24, 2014 at 5:34pm CST">5:34pm</time>
+                            </a>
+                        </td>
+
+                        <td class="comments">
+                        </td>
+                    </tr>
+                    }
+                    </tbody>
+                </table>
+            </section>
+            <section class="todos " data-collection-name="todolists" style="display: block;">
+                <header class="has_buttons">
+                    <h1><a href="/@teamId/project/@project.id/todolist">任务</a></h1>
+                    <button data-behavior="new_todolist" class="action_button">添加任务列表</button>
+                </header>
+                <article class="todolist new " data-behavior="expandable hide_buttons_on_expand">
+                    <header class="expanded_content">
+                        <form accept-charset="UTF-8" action="/@teamId/project/@project.id/todolist" class="new_todolist" data-remote="true" id="new_todolist" method="post">
+                            <div style="display:none">
+                                <input name="utf8" type="hidden" value="✓">
+                            </div>
+                            <header class="text_entry">
+                                <h3><input id="todolist_name" name="name" size="10" type="text" placeholder="任务列表名称"></h3>
+                            </header>
+
+                            <p class="submit">
+                                <button type="submit" class="btn btn-create-todolist btn-primary" data-disable-with="正在保存...">保存，开始添加任务</button>
+                                <a class="cancel" data-behavior="cancel" data-role="cancel" href="#">取消</a>
+                            </p>
+                        </form>
+                    </header>
+                </article>
+                <ul class="todolists ui-sortable" data-autoload-url="false" data-behavior="sortable_container" data-sortable-type="todolist">
+                    @project.todolists.map { todolist =>
+                        @if(todolist.todos.size > 0) {
+                        @helper.todolist(teamId, project.id.getOrElse(0), todolist)
+                        }
+                    }
+                </ul>
+                <div class="more_lists">
+                    <p class="completed">
+                        <a class="decorated" href="/@teamId/project/@project.id/todolist/completed">所有已完成任务</a>
+                    </p>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>
+
+
+}

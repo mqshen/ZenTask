@@ -1,0 +1,35 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                   controllers.Application.index
+
+GET     /login               controllers.UserController.login
+POST    /login               controllers.UserController.doLogin
+
+GET     /team                               controllers.TeamController.index
+
+GET     /:teamId                            controllers.TeamController.detail(teamId: Int)
+
+GET     /:teamId/project/:projectId         controllers.ProjectController.detail(teamId: Int, projectId: Int)
+
+GET     /:teamId/project/:projectId/message/new         controllers.MessageController.add(teamId: Int, projectId: Int)
+POST    /:teamId/project/:projectId/message             controllers.MessageController.doAdd(teamId: Int, projectId: Int)
+GET     /:teamId/project/:projectId/message/:messageId             controllers.MessageController.detail(teamId: Int, projectId: Int, messageId: Int)
+
+POST    /:teamId/project/:projectId/todolist             controllers.TodolistController.doAdd(teamId: Int, projectId: Int)
+POST    /:teamId/project/:projectId/todolist/:todolistId             controllers.TodolistController.doModify(teamId: Int, projectId: Int, todolistId: Int)
+
+POST    /:teamId/project/:projectId/todo                controllers.TodoController.doAdd(teamId: Int, projectId: Int)
+
+GET     /:teamId/project/:projectId/todo/:todoId/edit         controllers.TodoController.edit(teamId: Int, projectId: Int, todoId: Int)
+POST    /:teamId/project/:projectId/todo/:todoId         controllers.TodoController.doModify(teamId: Int, projectId: Int, todoId: Int)
+GET     /:teamId/project/:projectId/todo/:todoId/toggle         controllers.TodoController.toggle(teamId: Int, projectId: Int, todoId: Int, flag: Boolean)
+GET     /:teamId/project/:projectId/todo/:todoId/trash      controllers.TodoController.doDelete(teamId: Int, projectId: Int, todoId: Int)
+
+
+GET     /:teamId/people/me      controllers.PeopleController.me(teamId: Int)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)

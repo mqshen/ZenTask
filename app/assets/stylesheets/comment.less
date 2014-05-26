@@ -1,0 +1,81 @@
+@import "variables.less";
+
+section.comments {
+    >h4 {
+        font-size: 16px;
+        font-weight: normal;
+        padding: 10px 0 5px;
+        margin: 10px 0;
+        border-top: 1px solid #e5e5e5;
+    }
+    article.comment {
+        background-color: #fff;
+        margin: 0 0 20px 78px;
+        padding: 0;
+        position: relative;
+        min-height: 71px;
+        &.new,
+        &.edit{
+            background-color: none;
+            padding-top: 9px;
+            padding-bottom: 12px;
+            max-width: 580px;
+            font-size: 16px;
+            line-height: 21px;
+            &.expanded {
+                background: #fafafa;
+                padding: 9px 12px 12px 9px;
+                border: 1px solid #e5e5e5;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                background-color: #fafafa;
+                padding: 9px;
+                margin-left: 70px;
+                img.avatar {
+                    left: -70px;
+                }
+                footer {
+                    font-size: 13px;
+                    line-height: 17px;
+                    margin-top: 10px;
+                }
+            }
+            img.avatar {
+                margin-top: 2px;
+            }
+            header.text_entry .prompt {
+                padding: 10px 14px;
+                margin: -19px;
+                cursor: text;
+            }
+        }
+        img.avatar {
+            position: absolute;
+            left: -78px;
+            top: 0;
+            margin: -3px 0 0;
+            width: 59px;
+            height: 59px;
+        }
+    }
+}
+.text_entry {
+    &.no_shadow {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+    textarea,
+    input[type=text] {
+        color: black;
+        padding: 10px;
+        margin: 0;
+        width: 99%;
+        background: #fff;
+        border: none;
+        outline: none;
+        line-height: inherit;
+        -webkit-appearance: none;
+    }
+}

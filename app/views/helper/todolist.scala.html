@@ -1,0 +1,71 @@
+@(teamId: Int, projectId: Int, todolist: Todolist)
+<li data-behavior="sortable" data-sortable-type="todolist" id="sortable_todolist_@projectId">
+    <article class="todolist" id="todolist_@todolist.id" data-url="/@teamId/project/@projectId/todolist/@todolist.id" data-behavior="expandable">
+        <header class="collapsed_content" data-behavior="has_hover_content">
+            <div class="nubbin" data-behavior="nubbin hover_content" style="display: none; left: -71px;">
+                <div class="spacer"></div>
+                <a class="image delete" data-confirm="Are you sure you want to delete this to-do list?" data-method="post" data-remote="true" href="/@teamId/project/@projectId/todolists/@projectId/trash" rel="nofollow">Delete</a>
+                <a class="image edit" data-behavior="expand_on_click" href="#">Edit</a>
+            </div>
+            <h3 data-behavior="sortable_handle">
+                <a class="linked_title" href="/@teamId/project/@projectId/todolist/@todolist.id">
+                    @todolist.name
+                </a>
+                <span class="unlinked_title">@todolist.name</span>
+            </h3>
+            <p>
+                <em>@todolist.description</em>
+            </p>
+        </header>
+        <header class="expanded_content">
+            <form accept-charset="UTF-8" action="/@teamId/project/@projectId/todolist/@todolist.id" class="edit_todolist" data-remote="true" id="edit_todolist_@todolist.id" method="post">
+                <header class="text_entry">
+                    <h3 style="">
+                        <input id="todolist_name" name="name" size="10" type="text" value="@todolist.name">
+                    </h3>
+
+                    <p>
+                        <em>
+                            <textarea data-behavior="autoresize submit_on_enter" id="todolist_description" name="description" placeholder="补充说明（可选）" rows="1" data-autoresize="true" style="resize: none; overflow: hidden; min-height: 21px;">@todolist.description</textarea>
+                        </em>
+                    </p>
+                </header>
+                <p class="submit">
+                    <button type="submit" class="btn btn-primary" data-disable-with="正在保存...">保存</button>
+                    <a class="cancel" data-behavior="cancel" data-role="cancel" href="#">取消</a>
+                </p>
+            </form>
+        </header>
+        <ul class="todos  ui-sortable" data-behavior="sortable_container" data-sortable-type="todo">
+            @todolist.todos.map { todo =>
+                @helper.todo(teamId, todo)
+            }
+        </ul>
+        <ul class="new" data-behavior="expandable load_assignee_options">
+            <li class="collapsed_content">
+                <a class="decorated btn-new-todo " data-behavior="expand_on_click load_assignee_options" href="#">添加新任务</a>
+            </li>
+
+            <li class="expanded_content edit_mode">
+                <form accept-charset="UTF-8" action="/@teamId/project/@projectId/todo" class="new_todo" data-behavior="new_todo" data-remote="true" id="new_todo" method="post">
+                    <input id="todo_todolist_id" name="todolistId" type="hidden" value="@todolist.id">
+                    <input disabled="disabled" name="todo[completed]" type="hidden" value="0">
+                    <input disabled="disabled" id="todo_completed" name="todo[completed]" type="checkbox" value="1">
+                    <textarea data-behavior="autoresize submit_on_enter" id="todo_content" name="description" placeholder="新任务" rows="1"></textarea>
+
+                    <span style="position:relative">
+                        @helper.todoassign(projectId)
+                    </span>
+
+
+                    <p class="submit">
+                        <button type="submit" class="btn btn-create-todolist btn-primary">添加任务</button>
+                        <a class="cancel" data-behavior="cancel" data-role="cancel" href="#">取消</a>
+                    </p>
+                </form>
+            </li>
+        </ul>
+        <ul class="completed truncated" style="display: block;">
+        </ul>
+    </article>
+</li>

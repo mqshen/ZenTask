@@ -1,0 +1,6 @@
+@(todolist: Todolist, content: String)
+
+$('ul.todolists').prepend('@Html(content)')
+
+$('article.todolist.new a[data-behavior~=cancel]').click();
+$('#todolist_@todolist.id ul[data-behavior~=expandable]').expand("toggle");

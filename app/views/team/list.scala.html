@@ -1,0 +1,38 @@
+@(teams: List[Team])
+
+@public {
+
+<div class="container flat_container">
+    <div class="products drag_region reorder_region clearfix" style="width: 248px;">
+        <div id="zentask" class="product drag_container reorder_container">
+            <div class="liner">
+                <div class="header drag_target">
+                    <div class="liner">
+                        <div class="name">
+                            选择团队
+                        </div>
+                    </div>
+                </div>
+                <div class="accounts drag_region reorder_region">
+                    @teams.map { team =>
+
+                    <div class="account drag_container drag_target reorder_container menu_container " >
+                        <a href="/@team.id" class="bcx">
+                            <span class="logo basecamp trial">@team.name</span>
+                            <div class="name">
+                                <div>@team.name</div>
+                                <input type="hidden" name="ordering[]" value="16363089">
+                                <div class="loading"></div>
+                            </div>
+                        </a>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+}

@@ -1,0 +1,91 @@
+@import "variables.less";
+
+div.sheet.person.overview {
+    >header.person {
+        margin: 0;
+        padding: 20px 30px 10px !important;
+        background: rgba(0,0,0,0.04);
+        text-shadow: 1px 1px #fff;
+        border: 0 !important;
+        border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+        -webkit-border-radius: 3px 3px 0 0;
+        -moz-border-radius: 3px 3px 0 0;
+        border-radius: 3px 3px 0 0;
+        zoom: 1;
+        figure {
+            float: left;
+            margin-bottom: 0;
+            margin-right: 20px;
+            img.avatar {
+                width: 90px;
+                height: 90px;
+            }
+        }
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 26px;
+            color: #000;
+            margin: 10px 0 0;
+            border: 0;
+        }
+        h3 {
+            font-size: 16px;
+            font-weight: normal;
+            a {
+                color: #1c5c76;
+                text-decoration: underline;
+            }
+        }
+        &:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    }
+    h1.inactive_title {
+        display: none;
+    }
+    >div.sheet_body {
+        margin-top: 30px;
+        section>header h1 {
+            color: brown;
+            font-weight: normal;
+            font-size: 18px;
+        }
+    }
+}
+article.today_todo {
+    padding: 10px;
+    position: relative;
+    min-height: 60px;
+    background: #fcf6c0;
+    margin-bottom: 10px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    h5 {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 116px;
+        height: 75px;
+        padding: 0;
+        overflow: hidden;
+        background: url("@{base-url}/images/member-todo-today.png") no-repeat left top;
+        color: #a39c68;
+        text-indent: -999px;
+        opacity: .5;
+    }
+    div.nubbin {
+        background: #fcf6c0;
+        >div.spacer {
+            background: #fcf6c0;
+        }
+    }
+}

@@ -1,0 +1,45 @@
+@(teamId: Int, projects: List[Project])
+
+@main(teamId: Int, "Welcome to Play") {
+
+<div class="container flat_container">
+    <div class="panel home_tab project_index">
+        <nav class="projects_nav ">
+            <a data-behavior="new_project bounce" href="/{{teamId}}/project/new">
+                <span>新建项目</span>
+            </a>
+        </nav>
+        <div id="all_projects">
+            <section class="projects cards">
+                @projects.zipWithIndex.map { case (project, i) =>
+                    @if( i % 3 == 0 ) {
+                        <div class="row">
+                    }
+                    <article class="project_card">
+                        <!--
+                        <span class="star" data-project-id="{{project.id}}" title="标记项目"></span>
+                        -->
+                        <a class="card" href="/@teamId/project/@project.id" title="@project.name">
+                            <h5>@project.name</h5>
+                            <p style="margin-bottom: 5px;">@project.description</p>
+                            <div class="people">
+                                <!--
+                                {% for people in project.users %}
+                                <img class="avatar" height="40" src="/avatar/{{people.avatar}}" title="{{people.name}}" width="40">
+                                {% end %}
+                                -->
+                            </div>
+                        </a>
+                    </article>
+                    @if(i % 3 == 2 || i == projects.size -1)  {
+                        </div>
+                    }
+                }
+            <section>
+        </div>
+    </div>
+</div>
+
+
+
+}

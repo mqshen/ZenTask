@@ -1,0 +1,185 @@
+@(teamId: Int, project: Project, message: Message)
+@import util.DateHelper
+@main(teamId, "发起讨论") {
+<div class="container stack_container" data-container-id="1" style="width: 980px;">
+    <div class="panel sheet project inactive" data-behavior=" " data-status="active" data-path="/@teamId/project/@project.id">
+        <header>
+            <h1><a href="/@teamId/project/@project.id">@project.name</a></h1>
+        </header>
+        <div class="panel sheet message" style="margin-left: 20px; margin-bottom: -20px;">
+            <title>@project.name: @message.subject</title>
+            <header>
+                <h1 style="display: none;">讨论</h1>
+                <p class="reference_to_project">项目: <a data-stacker="false" href="/@teamId/project/@project.id">guanli</a></p>
+            </header>
+            <div class="sheet_body">
+                <section class="perma">
+                    <div id="message" class="has_tools" data-creator-id="7554423">
+                        <article class="message" id="message_26224648">
+                            <header>
+                                <h3>@message.subject</h3>
+                                <p>
+                                    由 @message.own.name 在<time data-local="time-ago" datetime="@message.createTime" title="">@DateHelper.formTimestamp(message.createTime)</time>发起
+                                </p>
+                            </header>
+                            <a data-replace-stack="true" href="/@teamId/people/@message.own.id">
+                                <img alt="@message.own.name" class="avatar" height="59" src="/avatar.96.gif" title="@message.own.name" width="59">
+                            </a>
+                            <div class="formatted_content" data-embeddable="">
+                                @Html(message.content)
+                            </div>
+                            <footer>
+                                <section class="comments" id="comments_for_message_@message.id" data-comments-count="0">
+                                    <h4>评论</h4>
+                                    <article class="comment new" data-behavior="expandable file_drop_target">
+                                        <img alt="" class="avatar" data-current-person-avatar="true" src="/avatar.96.gif" title="@message.own.name">
+                                        <div class="collapsed_content">
+                                            <header class="text_entry no_shadow">
+                                                <div class="prompt" data-behavior="expand_on_click" onclick="">发表评论或上传附件</div>
+                                            </header>
+                                        </div>
+                                        <div class="expanded_content">
+                                            <form accept-charset="UTF-8" action="/@teamId/project/@project.id/comment" class="new_comment" data-behavior="no_reset" data-remote="true" id="new_comment" method="post">
+                                                <header class="text_entry">
+                                                    <input id="comment_commentable_type" name="commentable_type" type="hidden" value="message">
+                                                    <input id="comment_commentable_id" name="commentable_id" type="hidden" value="26225560">
+                                                    <div data-behavior="wysiwyg_container" class="" data-wysiwyg-follow-threshold="116">
+                                                        <div id="toolbar" class="editor-toolbar-container" >
+                                                            <div class="editor_toolbar" data-behavior="wysiwyg_toolbar">
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="bold" title="粗体" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-btn editor-btn-bold">
+                                                                                <span>粗体</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="italic" title="斜体" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-btn editor-btn-italic">
+                                                                                <span>斜体</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="underline" title="下划线" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-btn editor-btn-underline">
+                                                                                <span>下划线</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="toolbar-separator"></div>
+
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="blockquote" title="引用" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-btn editor-btn-blockquote">
+                                                                                <span>引用</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="insertOrderedList" title="有序列表" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-btn editor-btn-insertOrderedList">
+                                                                                <span>有序列表</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="insertUnorderedList" title="无序列表" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-btn editor-btn-insertUnorderedList">
+                                                                                <span>无序列表</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="toolbar-separator"></div>
+
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" title="标题" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-text">
+                                                                                <span>H1</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="editor-btn-container">
+                                                                    <div data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" title="标题" class="editor-btn-outer-box ">
+                                                                        <div class="editor-btn-inner-box">
+                                                                            <div class="editor-text">
+                                                                                <span>H2</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <textarea id="content" class="body" data-behavior="autosave autoresize wysiwyg dirty_tracking submit_on_control_enter" id="message_content" name="content" rows="7" placeholder="..."></textarea>
+
+                                                        <div data-behavior="pending_attachments file_drop_target" data-sortable="true" class="attachments">
+                                                            <span class="prompt_graphic"></span>
+                                                            <div class="file_input_button">
+                                                                <span data-with-features="files_api">
+                                                                    拖拽 或
+                                                                </span>
+                                                                <span class="file_input_container">
+                                                                  <input name="file" type="file" multiple="" onchange="$(document).trigger('ie:change', this)" tabindex="-1">
+                                                                  <a class="decorated" data-behavior="local_file_picker" href="#" tabindex="-1">从本地选择</a>
+                                                                </span>
+                                                                <span data-without-features="files_api">
+                                                                    添加附件
+                                                                </span>
+                                                            </div>
+
+                                                            <ul class="pending_attachments ui-sortable"></ul>
+                                                        </div>
+                                                    </div>
+                                                </header>
+                                                <footer>
+                                                    <div class="submit">
+                                                        <input class="action_button green" name="commit" type="submit" value="发表评论">
+                                                    </div>
+                                                </footer>
+                                            </form>
+                                        </div>
+                                    </article>
+                                </section>
+                            </footer>
+                        </article>
+                        <aside class="tools" data-visible-to="creator admin" data-behavior="perma_tools">
+                            <div class="tool" data-role="tool">
+                                <a data-behavior="tool_action" data-replace-sheet="true" href="/@teamId/project/@project.id/message/@message.id/edit">编辑</a>
+                            </div>
+
+                            <div class="tool" data-role="tool">
+                                <a data-behavior="confirm_action" href="#">删除…</a>
+                                <span class="confirm" data-role="confirm_view">
+                                    <a data-behavior="tool_action" data-method="post" data-remote="true" href="/@teamId/project/@project.id/message/@message.id/trash" rel="nofollow">Delete this message?</a> <a data-behavior="tool_cancel" href="#">Nevermind</a>
+                                </span>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+}
