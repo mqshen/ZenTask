@@ -80,7 +80,7 @@ object TodoDAO {
   }
 
   def findUndoneByListId(listId: Int)(implicit s: Session): List[Todo] = {
-    todos.where(_.listId === listId).where(_.done === true).where(_.deleted === false).list()
+    todos.where(_.listId === listId).where(_.done === false).where(_.deleted === false).list()
   }
 
   def update(id: Int, description: Option[String], workerId: Option[Int], deadline: Option[Date])(implicit s: Session): Option[Todo] = {
