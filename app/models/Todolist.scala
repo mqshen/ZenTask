@@ -62,7 +62,7 @@ object TodolistDAO {
     todolists.where(_.id === id).firstOption
 
   def findByProjectId(projectId: Int)(implicit s: Session): List[Todolist] = {
-    todolists.where(_.projectId === projectId).list()
+    todolists.where(_.projectId === projectId).where(_.done === false).list()
   }
 
 }
