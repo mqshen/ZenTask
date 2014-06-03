@@ -20,6 +20,11 @@ object MessageController extends Controller with Secured {
     Ok(views.html.topic.add(teamId, project))
   }
 
+  def list(teamId: Int, projectId: Int, page: Option[Int]) = IsMemberOfProject(projectId) { (user, project, s) => implicit request =>
+    val messages = MessageDAO.findByProjectId(projectId, 10, page.getOrElse(0))(s)
+    representationOk(views.html.topic.list(teamId, project, messages), messages)
+  }
+
   val messageForm = Form(
     tuple(
       "subject" -> text,

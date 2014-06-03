@@ -220,3 +220,79 @@ article.todolist {
     border: none;
     box-shadow: none;
 }
+div.sheet {
+    &.has_sidebar {
+        >header h1 {
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 10px;
+        }
+        >aside {
+            display: inline-block;
+            vertical-align: top;
+            width: 240px;
+            padding: 0 0 20px 40px;
+            text-align: left;
+            font-size: 13px;
+            >p {
+                margin-bottom: 20px;
+            }
+            select {
+                width: 70%;
+            }
+        }
+        >div.sheet_body {
+            display: inline-block;
+            vertical-align: top;
+            width: 645px;
+            padding-right: 0;
+        }
+    }
+    &.todolists {
+        header>h1.inactive_title {
+            display: none;
+        }
+        &.has_sidebar>aside>p {
+            margin-bottom: 20px;
+        }
+    }
+    >header {
+        h1 {
+            font-size: 18px;
+            line-height: 18px;
+            font-weight: normal;
+        }
+        &.has_buttons h1 {
+            float: left;
+            padding-right: 15px;
+            padding-bottom: 0;
+            border: none !important;
+        }
+        >p {
+            font-size: 13px;
+            color: #777;
+            a {
+                color: #1c5c76;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+div.sheet_body>section>h3.filtered_header {
+    display: none;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: normal;
+    margin: -10px 0 20px -8px;
+    padding: 3px 8px;
+    background: #ffc;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+div.sheet.todolists.has_sidebar>div.sheet_body>section.todos.filtered .filtered_header {
+    display: block;
+}
+div.sheet.todo aside.tools {
+    top: -19px;
+}

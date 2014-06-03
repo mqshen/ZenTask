@@ -14,16 +14,16 @@ case class Message ( id: Option[Int],
                      subject: String,
                   content: String,
                   summary: String,
-                  ownId: Int,
+                  creatorId: Int,
                   createTime: Timestamp,
                   modifyTime: Option[Timestamp],
                   projectId: Int,
                   deleted: Boolean = false
                   ) {
 
-  lazy val own = {
+  lazy val creator = {
     DB.withSession{ implicit s =>
-      UserDAO.findById(ownId).get
+      UserDAO.findById(creatorId).get
     }
   }
 }
@@ -33,13 +33,13 @@ class MessageTable(tag: Tag) extends Table[Message](tag, "message") {
   def subject = column[String]("subject")
   def content = column[String]("content")
   def summary = column[String]("summary")
-  def ownId = column[Int]("own_id")
+  def creatorId = column[Int]("creator_id")
   def createTime = column[Timestamp]("create_time")
   def modifyTime = column[Option[Timestamp]]("modify_time")
   def projectId = column[Int]("project_id")
   def deleted = column[Boolean]("deleted")
 
-  def * = (id, subject, content, summary, ownId, createTime, modifyTime, projectId, deleted) <> (Message.tupled, Message.unapply _)
+  def * = (id, subject, content, summary, creatorId, createTime, modifyTime, projectId, deleted) <> (Message.tupled, Message.unapply _)
 }
 
 object MessageDAO {
@@ -66,8 +66,8 @@ object MessageDAO {
     messages.where(_.id === id).firstOption
   }
 
-  def findByProjectId(projectId: Int, size: Int)(implicit s: Session): List[Message] = {
-    messages.where(_.projectId === projectId).sortBy(_.createTime.desc).take(size).list()
+  def findByProjectId(projectId: Int, size: Int, page: Int = 0)(implicit s: Session): List[Message] = {
+    messages.where(_.projectId === projectId).sortBy(_.createTime.desc).drop(page * size).take(size).list()
   }
 
 }

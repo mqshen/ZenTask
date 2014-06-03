@@ -4,7 +4,7 @@ import play.api._
 import play.api.Play.current
 import play.api.mvc._
 import play.api.db.slick._
-import models.{TodoDAO, ProjectDAO}
+import models.{TodolistDAO, TodoDAO, ProjectDAO}
 import play.api.data.Form
 import play.api.data.Forms._
 
@@ -38,16 +38,14 @@ object TodoController extends Controller with Secured {
 //      representationOk(views.html.project.list(teamId, projects), projects)
 //    }
 //  }
-//
-//  def detail(teamId: Int, projectId: Int) = Action { implicit request =>
-//    DB.withSession { implicit s =>
-//      ProjectDAO.findById(projectId).map{ project =>
-//        representationOk(views.html.project.detail(teamId, project), project)
-//      }.getOrElse {
-//        representationNotFound()
-//      }
-//    }
-//  }
+
+  def detail(teamId: Int, projectId: Int, todoId: Int) = IsMemberOfProject(projectId){ (user, project, s) => implicit request =>
+    TodoDAO.findById(todoId)(s).map{ todo =>
+      representationOk(views.html.todo.detail(teamId, project, todo, user), todo)
+    }.getOrElse {
+      representationNotFound()
+    }
+  }
 
   def doAdd(teamId: Int, projectId: Int) = IsMemberOfProject(projectId){ (user, project, s) => implicit request =>
     todoForm.bindFromRequest.fold(
@@ -59,6 +57,7 @@ object TodoController extends Controller with Secured {
             Some(new java.sql.Date(date.getTime))
           }.getOrElse(None)
           val todo = TodoDAO.create(todoForm._1,  todoForm._2, user.id.get, todoForm._3, date, projectId, teamId)
+          TodolistDAO.uncompleteTodo(todo.listId)(s)
           val content = views.html.helper.todo(teamId, todo).body.replaceAll("[\r\n]", "")
           representationOk(views.html.todo.add(todo, content), todo)
         }
@@ -91,10 +90,13 @@ object TodoController extends Controller with Secured {
 
       TodoDAO.update(todoId, flag, user.id)(s).map{ todo =>
         val content = if(flag) {
+          TodolistDAO.completeTodo(todo.listId)(s)
           views.html.helper.todoComplete(teamId, projectId, todo).body.replaceAll("[\r\n]", "")
         }
-        else
+        else {
+          TodolistDAO.uncompleteTodo(todo.listId)(s)
           views.html.helper.todo(teamId, todo).body.replaceAll("[\r\n]", "")
+        }
         representationOk(views.html.todo.toggle(todo, content), todo)
       }.getOrElse(representationNotFound())
 

@@ -10,7 +10,7 @@
             <title>@project.name: @message.subject</title>
             <header>
                 <h1 style="display: none;">讨论</h1>
-                <p class="reference_to_project">项目: <a data-stacker="false" href="/@teamId/project/@project.id">guanli</a></p>
+                <p class="reference_to_project">项目: <a data-stacker="false" href="/@teamId/project/@project.id">@project.name</a></p>
             </header>
             <div class="sheet_body">
                 <section class="perma">
@@ -19,11 +19,11 @@
                             <header>
                                 <h3>@message.subject</h3>
                                 <p>
-                                    由 @message.own.name 在<time data-local="time-ago" datetime="@message.createTime" title="">@DateHelper.formTimestamp(message.createTime)</time>发起
+                                    由 @message.creator.name 在<time data-local="time-ago" datetime="@message.createTime" title="">@DateHelper.formTimestamp(message.createTime)</time>发起
                                 </p>
                             </header>
-                            <a data-replace-stack="true" href="/@teamId/people/@message.own.id">
-                                <img alt="@message.own.name" class="avatar" height="59" src="/avatar.96.gif" title="@message.own.name" width="59">
+                            <a data-replace-stack="true" href="/@teamId/people/@message.creator.id">
+                                <img alt="@message.creator.name" class="avatar" height="59" src="/avatar.96.gif" title="@message.creator.name" width="59">
                             </a>
                             <div class="formatted_content" data-embeddable="">
                                 @Html(message.content)
@@ -32,7 +32,7 @@
                                 <section class="comments" id="comments_for_message_@message.id" data-comments-count="0">
                                     <h4>评论</h4>
                                     <article class="comment new" data-behavior="expandable file_drop_target">
-                                        <img alt="" class="avatar" data-current-person-avatar="true" src="/avatar.96.gif" title="@message.own.name">
+                                        <img alt="" class="avatar" data-current-person-avatar="true" src="/avatar.96.gif" title="@message.creator.name">
                                         <div class="collapsed_content">
                                             <header class="text_entry no_shadow">
                                                 <div class="prompt" data-behavior="expand_on_click" onclick="">发表评论或上传附件</div>

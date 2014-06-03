@@ -96,41 +96,13 @@
         <div class="sheet_body">
             <section class="topics " data-collection-name="topics" style="display: block;">
                 <header class="has_buttons">
-                    <h1><a href="/@teamId/project/@project.id/topics">讨论</a></h1>
+                    <h1><a href="/@teamId/project/@project.id/topic">讨论</a></h1>
                     <a class="action_button button" href="/@teamId/project/@project.id/message/new">发起新讨论</a>
                 </header>
                 <table class="inbox">
                     <tbody>
                     @project.recentMessages.map { message =>
-                    <tr class="topic message_@message.id" id="topic_56435663">
-                        <td class="avatar">
-                            <a href="/@teamId/project/@project.id/message/@message.id">
-                                <img alt="@message.own.name" class="avatar" height="30" src="/avatar.40.gif" title="@message.own.id" width="30">
-                            </a>
-                        </td>
-
-                        <td class="who">
-                            <a href="/@teamId/project/@project.id/message/@message.id">@message.own.name</a>
-                        </td>
-
-                        <td class="what">
-
-                            <a href="/@teamId/project/@project.id/message/@message.id">
-                                <strong>@message.subject</strong>
-                                <span class="bucket_name">(@project.name)</span>
-                                <span class="excerpt"> - @message.summary</span>
-                            </a>
-                        </td>
-
-                        <td class="when">
-                            <a href="/2600950/projects/5927134/messages/26225560">
-                                <time data-local="time-or-date" datetime="2014-05-24T09:34:23Z" title="May 24, 2014 at 5:34pm CST">5:34pm</time>
-                            </a>
-                        </td>
-
-                        <td class="comments">
-                        </td>
-                    </tr>
+                        @helper.message(teamId, project, message)
                     }
                     </tbody>
                 </table>

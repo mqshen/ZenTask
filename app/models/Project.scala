@@ -8,6 +8,7 @@ import java.sql.{Timestamp, Date}
 import play.api.db.slick.Config.driver.simple._
 import play.api.Play.current
 import play.api.db.slick.DB
+import com.fasterxml.jackson.annotation.JsonIgnore
 
 case class Project ( id: Option[Int],
                   name: String,
@@ -16,6 +17,7 @@ case class Project ( id: Option[Int],
                   modifyTime: Option[Timestamp],
                   teamId: Int
                   ) {
+  @JsonIgnore
   lazy val todolists = {
     DB.withSession{ implicit s =>
       id.map{ id =>
@@ -24,6 +26,7 @@ case class Project ( id: Option[Int],
     }
   }
 
+  @JsonIgnore
   lazy val recentMessages = {
     DB.withSession{ implicit s =>
       id.map{ id =>

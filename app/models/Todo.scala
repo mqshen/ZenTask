@@ -9,6 +9,7 @@ import play.api.db.slick.Config.driver.simple._
 import play.api.Play.current
 import play.api.db.slick.DB
 import util.DateHelper
+import com.fasterxml.jackson.annotation.JsonIgnore
 
 case class Todo ( id: Option[Int],
                       description: String,
@@ -30,7 +31,7 @@ case class Todo ( id: Option[Int],
     }.getOrElse("没有截止时间")
   }
 
-  def worker() = {
+  lazy val worker = {
     workerId.map { workerId =>
       DB.withSession{ implicit s =>
         UserDAO.findById(workerId).map(user => user.name)
@@ -38,6 +39,19 @@ case class Todo ( id: Option[Int],
     }.getOrElse("未指派")
   }
 
+  @JsonIgnore
+  lazy val list = {
+    DB.withSession{ implicit s =>
+      TodolistDAO.findById(listId).get
+    }
+  }
+
+  @JsonIgnore
+  lazy val comments = {
+    DB.withSession{ implicit s =>
+      CommentDAO.findByCommentableTypeAndId("todo", id.get)
+    }
+  }
 }
 
 class TodoTable(tag: Tag) extends Table[Todo](tag, "todo") {

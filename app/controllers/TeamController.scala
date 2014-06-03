@@ -27,7 +27,7 @@ object TeamController extends Controller with Secured {
   def detail(teamId: Int) = IsMemberOf(teamId) { user => implicit request =>
     DB.withSession { implicit s =>
       val projects = ProjectDAO.findByTeamId(teamId)
-      representationOk(views.html.project.list(teamId, projects), projects)
+      representationOk(views.html.project.list(teamId, projects), Map("teamId" -> teamId, "projects" -> projects))
     }
   }
 

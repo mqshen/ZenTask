@@ -1,6 +1,6 @@
 package controllers
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.{SerializerProvider, JsonSerializer, ObjectMapper}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import play.api.mvc._
 import play.api.http.Writeable
@@ -12,15 +12,23 @@ import play.templates.{Format, BaseScalaTemplate}
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.mvc.AsyncResult
 import play.api.mvc.SimpleResult
+import com.fasterxml.jackson.core.JsonGenerator
 
 /**
  * Created by GoldRatio on 5/19/14.
  */
+class  NullSerializer extends JsonSerializer[AnyRef] {
+  override def serialize(value: AnyRef, jgen: JsonGenerator, provider: SerializerProvider)  {
+    jgen.writeString("")
+  }
+}
 
 object RepresentResult {
   val objectMapper = {
     val obj = new ObjectMapper
     obj.registerModule(DefaultScalaModule)
+    obj.getSerializerProvider.setNullValueSerializer(new NullSerializer)
+    obj
   }
 
   def representationNotFound()(implicit request: Request[_], writeable: Writeable[String]): SimpleResult = {

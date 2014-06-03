@@ -11,7 +11,7 @@ import play.api.data.Forms._
 /**
  * Created by GoldRatio on 5/22/14.
  */
-object TodolistController extends Controller {
+object TodolistController extends Controller with Secured{
 
   import RepresentResult._
 
@@ -29,14 +29,9 @@ object TodolistController extends Controller {
     }
   }
 
-  def detail(teamId: Int, projectId: Int) = Action { implicit request =>
-    DB.withSession { implicit s =>
-      ProjectDAO.findById(projectId).map{ project =>
-        representationOk(views.html.project.detail(teamId, project), project)
-      }.getOrElse {
-        representationNotFound()
-      }
-    }
+  def list(teamId: Int, projectId: Int) = IsMemberOfProject(projectId) { (user, project, s) => implicit request =>
+    val todolists = TodolistDAO.findByProjectId(projectId)(s)
+    representationOk(views.html.todolist.list(teamId, project, todolists), todolists)
   }
 
 

@@ -1,0 +1,30 @@
+@(teamId: Int, comment: Comment)
+<article class="comment" id="comment_@comment.id" data-creator-id="@comment.creator.id" style="">
+    <a data-replace-stack="true" href="/@teamId/people/@comment.creator.id">
+        <img alt="@comment.creator.name" class="avatar" height="96" src="" title="@comment.creator.name" width="96"></a>
+
+    <div class="formatted_content" data-embeddable="">
+        <strong>@comment.creator.name</strong> <br>
+        @Html(comment.content)
+    </div>
+
+    <footer class="time">
+        <a data-stacker="false" href="/@teamId/project/@comment.projectId/@comment.commentableType/@comment.commentableId#comment_@comment.id">
+            在<time data-local="time-ago" datetime="" title=""></time>发布</a>
+
+        <span data-available-until="2014-06-01T01:19:28Z" data-visible-to="admin creator">
+          – <a class="edit" data-remote="true" data-url="/@teamId/project/@comment.projectId/comment/@comment.id/edit" href="#">Edit</a> or
+            <a class="delete" data-confirm="Are you sure you want to delete this comment?" data-method="post" data-remote="true" href="/@teamId/project/@comment.projectId/comment/@comment.id/trash" rel="nofollow">Delete</a>
+          for <span data-display="available_time_left">13 minutes</span>
+        </span>
+
+        <span data-available-after="2014-06-01T01:19:28Z" data-visible-to="admin" style="display: none">
+          – <a class="edit" data-remote="true" data-url="/@teamId/project/@comment.projectId/comment/@comment.id/edit" href="#">Edit</a> or
+            <a class="delete" data-confirm="Are you sure you want to delete this comment?" data-method="post" data-remote="true" href="/@teamId/project/@comment.projectId/comment/@comment.id/trash" rel="nofollow">Delete</a>
+        </span>
+    </footer>
+
+    <div id="attachments_for_comment_@comment.id" class="partitioned_attachments">
+    </div>
+
+</article>

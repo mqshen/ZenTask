@@ -1,0 +1,3 @@
+@(comment: Comment, content: String)
+$('section#comments_for_@{comment.commentableType}_@comment.commentableId article.comment:last-of-type').before('@Html(content)')
+$('section#comments_for_@{comment.commentableType}_@comment.commentableId article.new').expand('toggle');

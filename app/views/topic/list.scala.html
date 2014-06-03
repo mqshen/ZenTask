@@ -1,0 +1,43 @@
+@(teamId: Int, project: Project, messages: List[Message])
+
+@import util.DateHelper
+
+@main(teamId, project.name + ": 所有讨论") {
+<div class="container stack_container" >
+    <div class="panel sheet project active inactive" >
+        <header>
+            <h1>
+                <a data-restore-position="" href="/@teamId/project/@project.id">@project.name</a>
+            </h1>
+        </header>
+        <div class="panel sheet topics" style="margin-left: 20px; margin-bottom: -20px;">
+            <title>@project.name :所有讨论</title>
+            <header class="has_buttons">
+                <h1 class="inactive_title">See all to-do lists</h1>
+                <div class="active_title">
+                    <h1>所有的讨论</h1>
+                </div>
+
+                <span class="position_reference">
+                    <a class="action_button button" href="/28/project/2/message/new">发起新讨论</a>
+                    <div class="blank_slate_arrow"></div>
+                </span>
+            </header>
+            <div class="sheet_body">
+                <section class="topics">
+                    <table class="inbox">
+                        <tbody>
+                        @messages.map { message =>
+                        @helper.message(teamId, project, message)
+                        }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+}

@@ -4,7 +4,7 @@ import play.api._
 import play.api.Play.current
 import play.api.mvc._
 import play.api.db.slick._
-import models.ProjectDAO
+import models.{UserDAO, ProjectDAO}
 
 /**
  * Created by GoldRatio on 5/19/14.
@@ -15,11 +15,12 @@ object ProjectController extends Controller with Secured {
 
 
   def detail(teamId: Int, projectId: Int) = IsMemberOfProject(projectId) { (user, project, s) => implicit request =>
-      ProjectDAO.findById(projectId)(s).map{ project =>
-        representationOk(views.html.project.detail(teamId, project), project)
-      }.getOrElse {
-        representationNotFound()
-      }
+    representationOk(views.html.project.detail(teamId, project), project)
+  }
+
+  def member(teamId: Int, projectId: Int) = IsMemberOfProject(projectId) { (user, project, s) => implicit request =>
+    val members = UserDAO.findUsersByProjectId(projectId)(s)
+    representationOk(views.html.project.member(teamId, project, members), members)
   }
 
 }

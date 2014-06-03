@@ -1,0 +1,111 @@
+@(teamId: Int, project: Project, todolists: List[Todolist])
+
+@import util.DateHelper
+
+@main(teamId, project.name + ": 任务列表") {
+<div class="container stack_container" >
+    <div class="panel sheet project active inactive" >
+        <header>
+            <h1>
+                <a data-restore-position="" href="/@teamId/project/@project.id">@project.name</a>
+            </h1>
+        </header>
+        <div class="panel sheet todolists has_sidebar" style="margin-left: 20px; margin-bottom: -20px;">
+            <title>@project.name :任务列表</title>
+            <header class="has_buttons">
+                <h1 class="inactive_title">See all to-do lists</h1>
+                <div class="active_title">
+                    <h1>任务列表</h1>
+                </div>
+
+                <span class="position_reference">
+                    <button data-behavior="new_todolist" class="action_button">添加任务列表</button>
+                    <div class="blank_slate_arrow"></div>
+                </span>
+            </header>
+            <div class="sheet_body">
+                <section class="todos">
+                    <h3 class="filtered_header" data-behavior="todo_filter_header">
+                        任务筛选
+                        <span data-behavior="assigned_to">assigned to <span data-behavior="value"></span></span>
+                        <span data-behavior="filter_and">and</span>
+                        <span data-behavior="filter_due">
+                          due <span data-behavior="value"></span>
+                        </span>
+                        – <a class="decorated" data-behavior="show_all_todos" href="#">Show all to-dos</a>
+                    </h3>
+                    <article class="todolist new " data-behavior="expandable hide_buttons_on_expand">
+                        <header class="expanded_content">
+                            <form accept-charset="UTF-8" action="/@teamId/project/@project.id/todolist" class="new_todolist" data-remote="true" id="new_todolist" method="post">
+                                <div style="display:none">
+                                    <input name="utf8" type="hidden" value="✓">
+                                </div>
+                                <header class="text_entry">
+                                    <h3><input id="todolist_name" name="name" size="10" type="text" placeholder="任务列表名称"></h3>
+                                </header>
+
+                                <p class="submit">
+                                    <button type="submit" class="btn btn-create-todolist btn-primary" data-disable-with="正在保存...">保存，开始添加任务</button>
+                                    <a class="cancel" data-behavior="cancel" data-role="cancel" href="#">取消</a>
+                                </p>
+                            </form>
+                        </header>
+                    </article>
+                    <ul class="todolists ui-sortable" data-autoload-url="false" data-behavior="sortable_container" data-sortable-type="todolist">
+                        @project.todolists.map { todolist =>
+                        @if(todolist.todos.size > 0) {
+                        @helper.todolist(teamId, project.id.getOrElse(0), todolist)
+                        }
+                        }
+                    </ul>
+                </section>
+            </div>
+            <aside>
+                <p>
+                    任务筛选 <br>
+                    <select data-behavior="todos_assignee_filter" >
+                        <option value="">所有人</option>
+                        <option value="unassigned">未分派</option>
+                    </select>
+                </p>
+
+                <p>
+                    <select data-behavior="todos_date_filter" >
+                        <option value="-1">所有时间</option>
+                        <option disabled="">-----</option>
+                        <option value="0">今天</option>
+                        <option value="1">明天</option>
+                        <option value="2">本周</option>
+                        <option value="3">下周</option>
+                        <option value="5">以后</option>
+                        <option disabled="">-----</option>
+                        <option value="4">已延误</option>
+                        <option value="6">没有截止时间</option>
+                    </select>
+                </p>
+
+
+                <!--
+                <p><a class="decorated" href="/2600950/projects/5533745/todolists/completed">See completed to-dos</a></p>
+
+                <h5>Current to-do lists</h5>
+                <ul>
+                    <li><a class="decorated" href="/2600950/projects/5533745/todolists/16851869" id="sidebar_todolist_16851869">Give the list a title</a></li>
+                    <li><a class="decorated" href="/2600950/projects/5533745/todolists/16850200" id="sidebar_todolist_16850200">Give the list a title</a></li>
+                    <li><a class="decorated" href="/2600950/projects/5533745/todolists/16851848" id="sidebar_todolist_16851848">Give the list a titles</a></li>
+                    <li><a class="decorated" href="/2600950/projects/5533745/todolists/15450885" id="sidebar_todolist_15450885">Some quick things to explore in Basecamp</a></li>
+                </ul>
+
+                <h5>已完成的任务列表</h5>
+                <ul>
+                    <li><a class="decorated" href="/@teamId/project/@project.id/todolist/todolist.id" id="sidebar_todolist_15450884">To-do list basics</a></li>
+                </ul>
+
+                -->
+            </aside>
+        </div>
+    </div>
+</div>
+
+
+}

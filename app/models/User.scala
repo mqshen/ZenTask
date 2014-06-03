@@ -6,6 +6,7 @@ package models
 
 import java.sql.Date
 import play.api.db.slick.Config.driver.simple._
+import com.fasterxml.jackson.annotation.JsonIgnore
 
 case class User (
   id: Option[Int],
@@ -20,6 +21,7 @@ class UserTable(tag: Tag) extends Table[User](tag, "user") {
   def id = column[Option[Int]]("id", O.PrimaryKey)
   def email = column[String]("email")
   def name = column[String]("name")
+  @JsonIgnore
   def password = column[String]("password")
 
   def * = (id, email, name, password) <> (User.tupled, User.unapply _)

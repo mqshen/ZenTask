@@ -8,13 +8,15 @@ import java.sql.{Timestamp, Date}
 import play.api.db.slick.Config.driver.simple._
 import play.api.Play.current
 import play.api.db.slick.DB
+import scala.slick.jdbc.StaticQuery.interpolation
 
 case class Todolist ( id: Option[Int],
                      name: String,
                      description: Option[String],
                      createTime: Timestamp,
                      modifyTime: Option[Timestamp],
-                     projectId: Int
+                     projectId: Int,
+                     uncompleteNo: Int = 0
                      ) {
   lazy val todos = {
     DB.withSession{ implicit s =>
@@ -32,8 +34,9 @@ class TodolistTable(tag: Tag) extends Table[Todolist](tag, "todolist") {
   def createTime = column[Timestamp]("create_time")
   def modifyTime = column[Option[Timestamp]]("modify_time")
   def projectId = column[Int]("project_id")
+  def uncompleteNo = column[Int]("uncomplete_no")
 
-  def * = (id, name, description, createTime, modifyTime, projectId) <> (Todolist.tupled, Todolist.unapply _)
+  def * = (id, name, description, createTime, modifyTime, projectId, uncompleteNo) <> (Todolist.tupled, Todolist.unapply _)
 }
 
 object TodolistDAO {
@@ -62,8 +65,15 @@ object TodolistDAO {
     todolists.where(_.id === id).firstOption
 
   def findByProjectId(projectId: Int)(implicit s: Session): List[Todolist] = {
-    todolists.where(_.projectId === projectId).list()
+    todolists.where(_.projectId === projectId).where(_.uncompleteNo > 0).list()
   }
 
+  def completeTodo(id: Int)(implicit s: Session) {
+    sqlu"update todolist set uncomplete_no = uncomplete_no - 1 where id = $id".first()
+  }
+
+  def uncompleteTodo(id: Int)(implicit s: Session) {
+    sqlu"update todolist set uncomplete_no = uncomplete_no + 1 where id = $id".first()
+  }
 }
 

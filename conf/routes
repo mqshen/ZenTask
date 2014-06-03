@@ -14,16 +14,24 @@ GET     /:teamId                            controllers.TeamController.detail(te
 
 GET     /:teamId/project/:projectId         controllers.ProjectController.detail(teamId: Int, projectId: Int)
 
+GET     /:teamId/project/:projectId/member      controllers.ProjectController.member(teamId: Int, projectId: Int)
+GET     /:teamId/project/:projectId/topic       controllers.MessageController.list(teamId: Int, projectId: Int, page: Option[Int])
+
+GET     /:teamId/project/:projectId/comment     controllers.CommentController.list(teamId: Int, projectId: Int, commentableType: String, commentableId: Int)
+POST    /:teamId/project/:projectId/comment     controllers.CommentController.doAdd(teamId: Int, projectId: Int)
+
 GET     /:teamId/project/:projectId/message/new         controllers.MessageController.add(teamId: Int, projectId: Int)
 POST    /:teamId/project/:projectId/message             controllers.MessageController.doAdd(teamId: Int, projectId: Int)
 GET     /:teamId/project/:projectId/message/:messageId             controllers.MessageController.detail(teamId: Int, projectId: Int, messageId: Int)
 
+GET     /:teamId/project/:projectId/todolist             controllers.TodolistController.list(teamId: Int, projectId: Int)
 POST    /:teamId/project/:projectId/todolist             controllers.TodolistController.doAdd(teamId: Int, projectId: Int)
 POST    /:teamId/project/:projectId/todolist/:todolistId             controllers.TodolistController.doModify(teamId: Int, projectId: Int, todolistId: Int)
 
 POST    /:teamId/project/:projectId/todo                controllers.TodoController.doAdd(teamId: Int, projectId: Int)
 
 GET     /:teamId/project/:projectId/todo/:todoId/edit         controllers.TodoController.edit(teamId: Int, projectId: Int, todoId: Int)
+GET     /:teamId/project/:projectId/todo/:todoId         controllers.TodoController.detail(teamId: Int, projectId: Int, todoId: Int)
 POST    /:teamId/project/:projectId/todo/:todoId         controllers.TodoController.doModify(teamId: Int, projectId: Int, todoId: Int)
 GET     /:teamId/project/:projectId/todo/:todoId/toggle         controllers.TodoController.toggle(teamId: Int, projectId: Int, todoId: Int, flag: Boolean)
 GET     /:teamId/project/:projectId/todo/:todoId/trash      controllers.TodoController.doDelete(teamId: Int, projectId: Int, todoId: Int)
