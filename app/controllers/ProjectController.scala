@@ -13,7 +13,6 @@ object ProjectController extends Controller with Secured {
 
   import RepresentResult._
 
-
   def detail(teamId: Int, projectId: Int) = IsMemberOfProject(projectId) { (user, project, s) => implicit request =>
     representationOk(views.html.project.detail(teamId, project), project)
   }

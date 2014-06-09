@@ -44,11 +44,11 @@ trait Secured {
   /**
    * Check if the connected user is a member of this project.
    */
-  def IsMemberOf(teamId: Int)(f: => User => Request[AnyContent] => Result) = IsAuthenticated { user => request =>
+  def IsMemberOf(teamId: Int)(f: => (User, JdbcBackend.Session) => Request[AnyContent] => Result) = IsAuthenticated { user => request =>
     user.id.map { userId =>
       DB.withSession { implicit s =>
         if(UserTeamRelDAO.isMember(teamId, userId)) {
-          f(user)(request)
+          f(user, s)(request)
         } else {
           Results.Forbidden
         }

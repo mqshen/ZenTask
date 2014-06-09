@@ -1,0 +1,7 @@
+@(teamId: Int, calendar: Calendar)
+<li class="calendar" id="calendar_@calendar.id" data-bucket-type="calendar" data-bucket-id="@calendar.id">
+    <span class="swatch" style="background-color: #@calendar.color">
+        <a href="#" class="active" data-behavior="toggle_bucket"></a>
+    </span>
+    <a href="/@teamId/calendar/@calendar.id/calendar_events" data-default-stack="true">@calendar.name</a>
+</li>

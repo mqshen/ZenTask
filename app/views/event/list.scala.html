@@ -1,0 +1,17 @@
+@(teamId: Int, events: List[Event], todos: List[Todo])
+@events.map { event =>
+    @if(event.startTime.isDefined) {
+        $('[data-date="@event.startDate"] > .timed').append('@helper.event(teamId,event)')
+    } else {
+        $('[data-date="@event.startDate"] > .all_day').append('@helper.event(teamId,event)')
+    }
+}
+@todos.map { todo =>
+    var $container = $('[data-date="@todo.deadline"]')
+    var $todosContainer = $container.find('>.todos')
+    if($todosContainer.length == 0) {
+        $todosContainer = $('<div class="events todos no_events"></div>')
+        $container.append($todosContainer)
+    }
+    $todosContainer.append('@helper.todoEvent(teamId,todo)')
+}

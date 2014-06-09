@@ -16,7 +16,7 @@
 		this.options = options;
 		this.$element = $(element);
 		
-		this.pickerContainer = $('<div class="ui-datepicker" style="display:none"></div>')
+		this.pickerContainer = $('<div class="balloon" style="display:none"></div>')
 			.appendTo(document.body);
         this.pickerContainer.css({position: 'abs'})
 		var left = this.$element.offset().left;
@@ -33,7 +33,7 @@
 		})
 		.calendar({
 			target: this,
-			selectFun: this.setDate
+			onDatePick: this.setDate
 		});
 	  	this.isShown = false;
 	}
@@ -132,7 +132,7 @@
  	 * =============== */
 
 	$(function () {
-		$('body').on('focus.input.data-api', '[data-toggle^=datepick]', function ( e ) {
+		$('body').on('focus.input.data-api', '[data-behavior^=datepicker]', function ( e ) {
 			
 			var $field = $(e.target);
 			

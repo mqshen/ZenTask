@@ -52,6 +52,12 @@ case class Todo ( id: Option[Int],
       CommentDAO.findByCommentableTypeAndId("todo", id.get)
     }
   }
+
+  lazy val project = {
+    DB.withSession{ implicit s =>
+      ProjectDAO.findById(projectId).get
+    }
+  }
 }
 
 class TodoTable(tag: Tag) extends Table[Todo](tag, "todo") {
@@ -126,6 +132,9 @@ object TodoDAO {
     q.update(true)
   }
 
+  def findByTeamId(teamId: Int, startDate: Date, endDate: Date)(implicit s: Session): List[Todo] = {
+    todos.where(_.teamId === teamId).where(_.deadline >= startDate).where(_.deadline <= endDate).where(_.done === false).list
+  }
 
   def findUncompletedByTeamIdAndWorkerId(teamId: Int, workerId: Int)(implicit s: Session): List[Todo] = {
     todos.where(_.teamId === teamId).where( _.workerId === workerId ).where(_.done === false).list

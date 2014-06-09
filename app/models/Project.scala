@@ -15,8 +15,9 @@ case class Project ( id: Option[Int],
                   description: String,
                   createTime: Timestamp,
                   modifyTime: Option[Timestamp],
-                  teamId: Int
-                  ) {
+                  teamId: Int,
+                  color: String = "ffffff"
+                  ) extends Color {
   @JsonIgnore
   lazy val todolists = {
     DB.withSession{ implicit s =>
@@ -43,8 +44,9 @@ class ProjectTable(tag: Tag) extends Table[Project](tag, "project") {
   def createTime = column[Timestamp]("create_time")
   def modifyTime = column[Option[Timestamp]]("modify_time")
   def teamId = column[Int]("team_id")
+  def color = column[String]("color")
 
-  def * = (id, name, description, createTime, modifyTime, teamId) <> (Project.tupled, Project.unapply _)
+  def * = (id, name, description, createTime, modifyTime, teamId, color) <> (Project.tupled, Project.unapply _)
 }
 
 object ProjectDAO {

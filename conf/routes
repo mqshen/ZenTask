@@ -14,6 +14,7 @@ GET     /:teamId                            controllers.TeamController.detail(te
 
 GET     /:teamId/project/:projectId         controllers.ProjectController.detail(teamId: Int, projectId: Int)
 
+
 GET     /:teamId/project/:projectId/member      controllers.ProjectController.member(teamId: Int, projectId: Int)
 GET     /:teamId/project/:projectId/topic       controllers.MessageController.list(teamId: Int, projectId: Int, page: Option[Int])
 
@@ -38,6 +39,11 @@ GET     /:teamId/project/:projectId/todo/:todoId/trash      controllers.TodoCont
 
 
 GET     /:teamId/people/me      controllers.PeopleController.me(teamId: Int)
+GET     /:teamId/calendar       controllers.CalendarController.list(teamId: Int)
+POST    /:teamId/calendar       controllers.CalendarController.doAdd(teamId: Int)
+
+POST    /:teamId/event          controllers.EventController.doAdd(teamId: Int)
+GET     /:teamId/event          controllers.EventController.list(teamId: Int, startDate: String, endDate: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
