@@ -131,22 +131,22 @@
 
                                                 <textarea id="content" class="body" data-behavior="autosave autoresize wysiwyg dirty_tracking submit_on_control_enter" id="message_content" name="content" rows="7" placeholder="..."></textarea>
 
-                                                <div data-behavior="pending_attachments file_drop_target" data-sortable="true" class="attachments">
+                                                <div data-behavior="pending_attachments file_drop_target" id="file_upload_todo"  data-sortable="true" class="attachments">
                                                     <span class="prompt_graphic"></span>
                                                     <div class="file_input_button">
-                                                                <span data-with-features="files_api">
-                                                                    拖拽 或
-                                                                </span>
-                                                                <span class="file_input_container">
-                                                                  <input name="file" type="file" multiple="" onchange="$(document).trigger('ie:change', this)" tabindex="-1">
-                                                                  <a class="decorated" data-behavior="local_file_picker" href="#" tabindex="-1">从本地选择</a>
-                                                                </span>
-                                                                <span data-without-features="files_api">
-                                                                    添加附件
-                                                                </span>
+                                                        <span data-with-features="files_api">
+                                                            拖拽 或
+                                                        </span>
+                                                        <span class="file_input_container">
+                                                          <input name="file" type="file" multiple="" onchange="$(document).trigger('ie:change', this)" tabindex="-1">
+                                                          <a class="decorated" data-behavior="local_file_picker" href="#" tabindex="-1">从本地选择</a>
+                                                        </span>
+                                                        <span data-without-features="files_api">
+                                                            添加附件
+                                                        </span>
                                                     </div>
 
-                                                    <ul class="pending_attachments ui-sortable"></ul>
+                                                    <ul class="pending_attachments ui-sortable" id="attachments_container"></ul>
                                                 </div>
                                             </div>
                                         </header>
@@ -185,5 +185,8 @@
     stylesheets:  "css/stylesheet.css",
     parserRules:  wysihtml5ParserRules
   });
+  $('#file_upload_todo').fileuploader({
+    url: '/attachment'
+  })
 </script>
 }

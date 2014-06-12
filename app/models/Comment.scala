@@ -26,6 +26,12 @@ case class Comment ( id: Option[Int],
       UserDAO.findById(creatorId).get
     }
   }
+
+  lazy val attachments = {
+    DB.withSession{ implicit s =>
+      AttachmentReferenceDAO.findByTargetTypeAndId("comment", id.get)
+    }
+  }
 }
 
 class CommentTable(tag: Tag) extends Table[Comment](tag, "comment") {

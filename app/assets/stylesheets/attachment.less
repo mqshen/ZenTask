@@ -1,0 +1,33 @@
+@import "variables.less";
+
+form div.attachments ul.pending_attachments {
+    margin: 10px 0 0 13px;
+    padding-top: 42px;
+    >li:first-of-type {
+        margin-top: -42px;
+    }
+}
+ul.pending_attachments>li {
+    a.remove {
+        display: inline-block;
+        padding: 0;
+        width: 16px;
+        height: 16px;
+        background: url("@{base-url}/images/circular_x_black.png");
+        opacity: 0.3;
+        vertical-align: bottom;
+        cursor: hand;
+        float: left;
+        margin-top: 1px;
+        span {
+            display: none;
+        }
+    }
+    &.image img.thumbnail {
+        display: block;
+        max-width: 150px;
+        max-height: 150px;
+        margin-bottom: 2px;
+        border-color: #dcdcdc;
+    }
+}

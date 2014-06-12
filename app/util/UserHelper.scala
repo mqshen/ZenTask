@@ -16,4 +16,6 @@ object UserHelper {
     }
   }
 
+  val fileServer = current.configuration.getString("fileServer")
+
 }

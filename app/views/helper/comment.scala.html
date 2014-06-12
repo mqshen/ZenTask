@@ -1,4 +1,7 @@
 @(teamId: Int, comment: Comment)
+
+@import util.UserHelper
+
 <article class="comment" id="comment_@comment.id" data-creator-id="@comment.creator.id" style="">
     <a data-replace-stack="true" href="/@teamId/people/@comment.creator.id">
         <img alt="@comment.creator.name" class="avatar" height="96" src="" title="@comment.creator.name" width="96"></a>
@@ -25,6 +28,19 @@
     </footer>
 
     <div id="attachments_for_comment_@comment.id" class="partitioned_attachments">
+        <div class="image_grid_view in_1_columns" data-columns="1" data-scaled="true">
+            @comment.attachments.map { attachment =>
+            <div class="cell image" id="attachment_@comment.id" data-container-id="comment_@comment.id">
+                <article class="attachment">
+                    <figure class="thumbnail proportional">
+                        <div class="background " data-role="content_container" style="height: 366px; width: 700px;">
+                            <img alt="" class="thumbnail" src="@{UserHelper.fileServer}@attachment.url" data-scaled="true" >
+                        </div>
+                    </figure>
+                </article>
+            </div>
+            }
+        </div>
     </div>
 
 </article>

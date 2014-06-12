@@ -18,7 +18,7 @@ GET     /:teamId/project/:projectId         controllers.ProjectController.detail
 GET     /:teamId/project/:projectId/member      controllers.ProjectController.member(teamId: Int, projectId: Int)
 GET     /:teamId/project/:projectId/topic       controllers.MessageController.list(teamId: Int, projectId: Int, page: Option[Int])
 
-GET     /:teamId/project/:projectId/comment     controllers.CommentController.list(teamId: Int, projectId: Int, commentableType: String, commentableId: Int)
+GET     /:teamId/project/:projectId/comment     controllers.CommentController.doList(teamId: Int, projectId: Int, commentableType: String, commentableId: Int)
 POST    /:teamId/project/:projectId/comment     controllers.CommentController.doAdd(teamId: Int, projectId: Int)
 
 GET     /:teamId/project/:projectId/message/new         controllers.MessageController.add(teamId: Int, projectId: Int)
@@ -44,6 +44,8 @@ POST    /:teamId/calendar       controllers.CalendarController.doAdd(teamId: Int
 
 POST    /:teamId/event          controllers.EventController.doAdd(teamId: Int)
 GET     /:teamId/event          controllers.EventController.list(teamId: Int, startDate: String, endDate: String)
+
+POST    /attachment             controllers.AttachmentController.upload
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
