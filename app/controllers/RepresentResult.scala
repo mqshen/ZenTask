@@ -8,9 +8,7 @@ import play.api.mvc.Results.Status
 import play.api.http.Status._
 import play.api.libs.iteratee.Enumerator
 import play.api.templates.HtmlFormat
-import play.templates.{Format, BaseScalaTemplate}
 import scala.concurrent.{ExecutionContext, Future}
-import play.api.mvc.AsyncResult
 import play.api.mvc.SimpleResult
 import com.fasterxml.jackson.core.JsonGenerator
 
