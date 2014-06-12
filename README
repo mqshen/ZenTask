@@ -1,3 +1,11 @@
 scala, play framework,slick 学习/项目协作/ 
 
+use database/mytask_database_with_testData.sql create a test database with test data;
+username: goldratio87@gmail.com
+password: 111111
+
+cp conf/application.conf.sample to conf/application.conf and change db.default.url to yout own database
+
+user activitor run to start server
+
 ios client https://github.com/mqshen/TaskWave
